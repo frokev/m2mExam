@@ -1,0 +1,8 @@
+{
+  "name": "m2mSecurity",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
