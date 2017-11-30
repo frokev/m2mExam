@@ -1,14 +1,45 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
+
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-content class="outer-content">
+  <ion-list-header>System</ion-list-header>
+  <ion-list >
+    <ion-item>
+      <ion-icon name="" item-start></ion-icon>
+      Connected
+      <div *ngIf="!status" item-end><ion-badge color="danger"> </ion-badge></div>
+      <div *ngIf="status" item-end><ion-badge color="secondary"> </ion-badge></div>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="" item-start></ion-icon>
+      Motion
+      <div *ngIf="!motion" item-end><ion-badge color="danger"> </ion-badge></div>
+      <div *ngIf="motion" item-end><ion-badge color="secondary"> </ion-badge></div>
+    </ion-item>
+  </ion-list>
+
+  <ion-list-header>Options</ion-list-header>
+  <ion-list >
+    <ion-item>
+      <ion-icon name="" item-start></ion-icon>
+      <ion-label>Toggle system</ion-label>
+      <ion-toggle [(ngModel)]="isRecording" color="secondary"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+
 </ion-content>
+
+
