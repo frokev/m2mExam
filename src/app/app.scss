@@ -27,8 +27,13 @@ ion-list {
 
 margin-bottom: 5px !important;
     ion-item {
-        padding-left: 0px !important;
+
     }
+}
+ 
+#card-text-right {
+    display: block;
+    text-align: right;
 }
 
 .outer-content {

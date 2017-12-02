@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as mqtt from 'mqtt';
+import { MqttClient } from 'mqtt/types/lib/connect';
+
 /**
  * Generated class for the HomePage page.
  *
@@ -17,7 +19,10 @@ export class HomePage {
 
   status = false;
   isRecording = true;
-  motion = true;
+  motion = false;
+  switchStatus = false;
+
+  client: MqttClient; 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
@@ -28,23 +33,42 @@ export class HomePage {
       password : 'qYs1sz9Y31a9'
     }
 
-    let client = mqtt.connect( 'mqtts://m23.cloudmqtt.com', options);
+    this.client = mqtt.connect( 'mqtts://m23.cloudmqtt.com', options);
 
-    client.on('close', func => {
+    this.client.on('close', func => {
       this.status = false;
     })
 
-    client.on('connect', func => {
-      client.subscribe('device/pir');
+    this.client.on('connect', func => {
+      this.client.subscribe('device/pir');
+      this.client.subscribe('device/switch');
       this.status = true;
     });
 
-    client.on('message', (topic, msg) => {
+    this.client.on('message', (topic, msg) => {
       if (topic == "device/pir") {
         if (msg.toString() == "1")
           this.motion = true;
+        else
+          this.motion = false;
+      }
+
+      else if (topic == "device/switch") {
+        if (msg.toString() == "0") {
+          this.switchStatus = true;
+        }
+        else
+          this.switchStatus = false;
       }
     });
+  }
+
+  public toggleSystem(isRecording: boolean){
+    let valobj = { 'value' : isRecording }
+
+    this.client.publish("device/isRecording", JSON.stringify(valobj));
+
+    this.isRecording = isRecording;
   }
 
   ionViewDidLoad() {

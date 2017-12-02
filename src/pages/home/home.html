@@ -17,25 +17,27 @@
   <ion-list-header>System</ion-list-header>
   <ion-list >
     <ion-item>
-      <ion-icon name="" item-start></ion-icon>
       Connected
       <div *ngIf="!status" item-end><ion-badge color="danger"> </ion-badge></div>
       <div *ngIf="status" item-end><ion-badge color="secondary"> </ion-badge></div>
     </ion-item>
     <ion-item>
-      <ion-icon name="" item-start></ion-icon>
       Motion
       <div *ngIf="!motion" item-end><ion-badge color="danger"> </ion-badge></div>
       <div *ngIf="motion" item-end><ion-badge color="secondary"> </ion-badge></div>
     </ion-item>
+    <ion-item>
+        Switch
+        <div *ngIf="!switchStatus" item-end><ion-badge color="danger"> </ion-badge></div>
+        <div *ngIf="switchStatus" item-end><ion-badge color="secondary"> </ion-badge></div>
+      </ion-item>
   </ion-list>
 
   <ion-list-header>Options</ion-list-header>
   <ion-list >
     <ion-item>
-      <ion-icon name="" item-start></ion-icon>
       <ion-label>Toggle system</ion-label>
-      <ion-toggle [(ngModel)]="isRecording" color="secondary"></ion-toggle>
+      <ion-toggle [(ngModel)]="isRecording" (ngModelChange)="toggleSystem(isRecording)" color="secondary"></ion-toggle>
     </ion-item>
   </ion-list>
 

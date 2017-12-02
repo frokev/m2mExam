@@ -15,4 +15,30 @@
 
 <ion-content class="outer-content">
 
+<ion-list>
+  <div *ngFor="let val of log">
+
+    <ion-card *ngIf="val.type == 'pir'">
+        <ion-card-header>
+          Motion detector
+        </ion-card-header>
+        <ion-card-content> 
+           Motion time: <ion-note>{{val.motionTime}}</ion-note> <br/>
+           Timestamp: <ion-note>{{val.timeStamp}}</ion-note>
+        </ion-card-content>
+      </ion-card>
+
+    <ion-card *ngIf="val.type == 'switch'">
+      <ion-card-header>
+        Magnetic switch
+      </ion-card-header>
+      <ion-card-content> 
+          Switch status: <ion-note>{{val.switch}}</ion-note> <br/>
+          Timestamp: <ion-note>{{val.timeStamp}}</ion-note>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-list>
+
 </ion-content>
